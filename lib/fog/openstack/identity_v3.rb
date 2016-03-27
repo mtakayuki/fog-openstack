@@ -13,6 +13,7 @@ module Fog
                    :openstack_project_name, :openstack_domain_name,
                    :openstack_user_domain, :openstack_project_domain,
                    :openstack_user_domain_id, :openstack_project_domain_id,
+                   :openstack_trust_id,
                    :openstack_api_key, :openstack_current_user_id, :openstack_userid, :openstack_username,
                    :current_user, :current_user_id, :current_tenant,
                    :provider, :openstack_identity_prefix, :openstack_endpoint_path_matches
@@ -40,6 +41,8 @@ module Fog
         collection :os_credentials
         model :policy
         collection :policies
+        model :trust
+        collection :trusts
 
         request_path 'fog/openstack/requests/identity_v3'
 
@@ -118,6 +121,14 @@ module Fog
         request :create_policy
         request :update_policy
         request :delete_policy
+        request :list_trusts
+        request :get_trust
+        request :create_trust
+        request :update_trust
+        request :delete_trust
+        request :list_trust_roles
+        request :get_trust_role
+        request :check_trust_role
 
         class Mock
           include Fog::OpenStack::Core

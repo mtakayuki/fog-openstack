@@ -311,6 +311,7 @@ module Fog
       api_key           = options[:openstack_api_key].to_s
       username          = options[:openstack_username].to_s
       tenant_name       = options[:openstack_tenant].to_s
+      trust_id          = options[:openstack_trust_id]
       auth_token        = options[:openstack_auth_token] || options[:unscoped_token]
       uri               = options[:openstack_auth_uri]
       omit_default_port = options[:openstack_auth_omit_default_port]
@@ -329,6 +330,7 @@ module Fog
         }
       end
       request_body[:auth][:tenantName] = tenant_name if tenant_name
+      request_body[:auth][:trust_id] = trust_id if trust_id
 
       request = {
         :expects => [200, 204],
@@ -357,6 +359,7 @@ module Fog
       user_domain_id    = options[:openstack_user_domain_id]
       project_name      = options[:openstack_project_name]
       project_id        = options[:openstack_project_id]
+      trust_id          = options[:openstack_trust_id]
       auth_token        = options[:openstack_auth_token] || options[:unscoped_token]
       uri               = options[:openstack_auth_uri]
       omit_default_port = options[:openstack_auth_omit_default_port]
@@ -378,6 +381,8 @@ module Fog
                           end
       elsif domain_name || domain_id
         scope[:domain] = domain_id.nil? ? {:name => domain_name} : {:id => domain_id}
+      elsif trust_id
+        scope[:'OS-TRUST:trust'] = {:id => trust_id}
       else
         # unscoped token
       end

@@ -12,6 +12,7 @@ module Fog
                            :openstack_project_name, :openstack_project_id,
                            :openstack_project_domain, :openstack_user_domain, :openstack_domain_name,
                            :openstack_project_domain_id, :openstack_user_domain_id, :openstack_domain_id,
+                           :openstack_trust_id,
                            :openstack_identity_prefix]
 
       # Fog::Image::OpenStack.new() will return a Fog::Volume::OpenStack::V2 or a Fog::Volume::OpenStack::V1,
